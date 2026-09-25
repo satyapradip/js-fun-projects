@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Production-grade Toast Notification System with FIFO queuing, pause-on-hover, action buttons, and accessible ARIA live regions.">
+  <title>Toast Notification System | Machine Coding Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <header class="app-header">
+      <span class="badge">Machine Coding SDE-2 Architecture</span>
+      <h1>Toast Notification System</h1>
+      <p class="subtitle">Built with FIFO Queue Management, Pause-on-Hover Timers & Accessible Live Regions</p>
+    </header>
+
+    <!-- Interactive Playground Controls -->
+    <main class="playground-card">
+      <h2>Interactive Toast Playground</h2>
+      <p class="section-desc">Trigger diverse notification states or customize concurrency and positioning dynamically.</p>
+
+      <!-- Quick Triggers Row -->
+      <div class="triggers-grid">
+        <button type="button" class="btn btn-success" id="btnSuccess">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Success Toast
+        </button>
+
+        <button type="button" class="btn btn-error" id="btnError">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          Error Toast
+        </button>
+
+        <button type="button" class="btn btn-warning" id="btnWarning">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+          Warning Toast
+        </button>
+
+        <button type="button" class="btn btn-info" id="btnInfo">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          Info Toast
+        </button>
+      </div>
+
+      <!-- Action Toast Trigger & Rapid Burst -->
+      <div class="advanced-triggers">
+        <button type="button" class="btn btn-action" id="btnActionToast">
+          🚀 Toast with Interactive Action ("Undo")
+        </button>
+
+        <button type="button" class="btn btn-burst" id="btnBurstToast">
+          ⚡ Trigger Rapid Burst (10 Toasts in 100ms)
+        </button>
+      </div>
+
+      <!-- Customization Form -->
+      <div class="config-panel">
+        <div class="config-group">
+          <label for="positionSelect">Screen Position</label>
+          <select id="positionSelect">
+            <option value="top-right" selected>Top Right</option>
+            <option value="top-left">Top Left</option>
+            <option value="bottom-right">Bottom Right</option>
+            <option value="bottom-left">Bottom Left</option>
+            <option value="top-center">Top Center</option>
+            <option value="bottom-center">Bottom Center</option>
+          </select>
+        </div>
+
+        <div class="config-group">
+          <label for="durationInput">Auto-Dismiss Duration (ms)</label>
+          <input type="number" id="durationInput" value="4000" min="1000" max="15000" step="500">
+        </div>
+
+        <div class="config-group">
+          <label for="maxQueueInput">Max Visible Toasts (Limit)</label>
+          <input type="number" id="maxQueueInput" value="4" min="1" max="10">
+        </div>
+      </div>
+    </main>
+
+    <!-- Real-time Queue Diagnostics -->
+    <div class="diagnostics-bar">
+      <div class="diag-item">
+        <span class="diag-label">Active On Screen:</span>
+        <span class="diag-val text-cyan" id="diagActive">0</span>
+      </div>
+      <div class="diag-item">
+        <span class="diag-label">Pending In Queue:</span>
+        <span class="diag-val text-amber" id="diagQueued">0</span>
+      </div>
+      <div class="diag-item">
+        <span class="diag-label">Total Dispatched:</span>
+        <span class="diag-val text-green" id="diagTotal">0</span>
+      </div>
+    </div>
+
+    <!-- Interview Concepts Callout -->
+    <aside class="interview-callout">
+      <h3>💡 Machine Coding Notification Architecture Checklist:</h3>
+      <ul>
+        <li><strong>API Ergonomics:</strong> Designing a simple imperative API like <code>Toast.show()</code> or <code>Toast.success()</code>.</li>
+        <li><strong>FIFO Concurrency Queue:</strong> Managing burst requests gracefully without flooding the user viewport.</li>
+        <li><strong>Pause-on-Hover:</strong> Freezing CSS keyframe animations and remaining duration on <code>mouseenter</code>.</li>
+        <li><strong>Animation Lifecycle:</strong> Removing DOM nodes only after the <code>animationend</code> event has fired.</li>
+        <li><strong>WCAG a11y:</strong> Assigning <code>role="alert"</code> vs <code>role="status"</code> with live regions.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Toast Container Host will be dynamically placed based on position setting -->
+  <div id="toastContainer" class="toast-container top-right" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
