@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Production-grade Kanban Board with HTML5 Drag and Drop API, LocalStorage persistence, and CRUD task lifecycle.">
+  <title>Kanban Board & Drag-and-Drop | Machine Coding Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <span class="badge">Machine Coding SDE-2 Classic</span>
+        <h1>Kanban Board Architecture</h1>
+        <p class="subtitle">Built with HTML5 Drag & Drop API, Immutable State & LocalStorage Persistence</p>
+      </div>
+
+      <div class="header-actions">
+        <!-- Search filter -->
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 14z"/>
+          </svg>
+          <input type="text" id="taskSearch" placeholder="Filter tasks..." autocomplete="off">
+        </div>
+
+        <button type="button" class="btn btn-primary" id="openAddModalBtn">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+          </svg>
+          New Task
+        </button>
+      </div>
+    </header>
+
+    <!-- Kanban Columns Grid -->
+    <main class="kanban-grid" id="kanbanGrid">
+      <!-- Column 1: Backlog -->
+      <section class="kanban-column" data-status="backlog" aria-labelledby="col-backlog-title">
+        <header class="column-header">
+          <div class="col-title-wrap">
+            <span class="status-dot dot-gray"></span>
+            <h2 id="col-backlog-title">Backlog</h2>
+          </div>
+          <span class="task-count" id="count-backlog">0</span>
+        </header>
+        <div class="cards-dropzone" id="zone-backlog">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- Column 2: In Progress -->
+      <section class="kanban-column" data-status="in-progress" aria-labelledby="col-progress-title">
+        <header class="column-header">
+          <div class="col-title-wrap">
+            <span class="status-dot dot-amber"></span>
+            <h2 id="col-progress-title">In Progress</h2>
+          </div>
+          <span class="task-count" id="count-in-progress">0</span>
+        </header>
+        <div class="cards-dropzone" id="zone-in-progress">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- Column 3: In Review -->
+      <section class="kanban-column" data-status="in-review" aria-labelledby="col-review-title">
+        <header class="column-header">
+          <div class="col-title-wrap">
+            <span class="status-dot dot-purple"></span>
+            <h2 id="col-review-title">In Review</h2>
+          </div>
+          <span class="task-count" id="count-in-review">0</span>
+        </header>
+        <div class="cards-dropzone" id="zone-in-review">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- Column 4: Done -->
+      <section class="kanban-column" data-status="done" aria-labelledby="col-done-title">
+        <header class="column-header">
+          <div class="col-title-wrap">
+            <span class="status-dot dot-green"></span>
+            <h2 id="col-done-title">Done</h2>
+          </div>
+          <span class="task-count" id="count-done">0</span>
+        </header>
+        <div class="cards-dropzone" id="zone-done">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal for Adding / Editing Tasks -->
+    <div class="modal-overlay" id="taskModal" hidden aria-modal="true" role="dialog">
+      <div class="modal-card">
+        <header class="modal-header">
+          <h3 id="modalTitle">Create New Task</h3>
+          <button type="button" class="btn-close" id="closeModalBtn" aria-label="Close dialog">&times;</button>
+        </header>
+
+        <form id="taskForm" class="modal-body">
+          <input type="hidden" id="taskId">
+
+          <div class="form-group">
+            <label for="taskTitleInput">Task Title <span class="required">*</span></label>
+            <input type="text" id="taskTitleInput" placeholder="e.g. Implement OAuth2 Refresh Token" required maxlength="80">
+          </div>
+
+          <div class="form-group">
+            <label for="taskDescInput">Description</label>
+            <textarea id="taskDescInput" rows="3" placeholder="Brief technical context or acceptance criteria..." maxlength="250"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="taskPriorityInput">Priority</label>
+              <select id="taskPriorityInput">
+                <option value="low">Low Priority</option>
+                <option value="medium" selected>Medium Priority</option>
+                <option value="high">High Priority</option>
+              </select>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="taskStatusInput">Column Status</label>
+              <select id="taskStatusInput">
+                <option value="backlog">Backlog</option>
+                <option value="in-progress">In Progress</option>
+                <option value="in-review">In Review</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </div>
+
+          <footer class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="cancelModalBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="saveTaskBtn">Save Task</button>
+          </footer>
+        </form>
+      </div>
+    </div>
+
+    <!-- Interview Concepts Callout -->
+    <aside class="interview-callout">
+      <h3>💡 Machine Coding Drag & Drop Evaluation Checklist:</h3>
+      <ul>
+        <li><strong>Event Lifecycle:</strong> <code>dragstart</code>, <code>dragover</code>, <code>drop</code>, and <code>dragend</code>.</li>
+        <li><strong>Prevent Default:</strong> Browsers reject drops by default! Calling <code>e.preventDefault()</code> inside <code>dragover</code> is mandatory.</li>
+        <li><strong>DOM Order vs State Order:</strong> Calculating insertion index using <code>e.clientY</code> and element midpoint offsets.</li>
+        <li><strong>State Immutability:</strong> Filtering and splicing arrays without directly mutating DOM elements.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
