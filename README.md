@@ -7,18 +7,24 @@
 
 ## 🧭 Repository Overview & Curriculum Matrix
 
-This repository contains 6 hands-on interactive projects designed to teach modern JavaScript mechanics, browser internals, and battle-tested machine coding architectures.
+This repository contains 12 hands-on interactive projects designed to teach modern JavaScript mechanics, browser internals, and battle-tested machine coding architectures — taking you from beginner fundamentals to SDE-3 frontend mastery.
 
 Every single project contains a dedicated, production-grade **`README.md`** with line-by-line breakdowns, browser runtime mechanics, interview pitfalls, and senior-level refactors.
 
 | # | Project Directory | Core JavaScript Concepts | Browser Runtime & Performance | Machine Coding Round Weightage | Deep-Dive Guide |
-| :-: | :--- | :--- | :--- | :--- | :-: |
+| :-: | :--- | :--- | :--- | :--- | :--- |
 | **07** | [07_Add_friend_project](file:///e:/js-fun-projects/07_Add_friend_project) | State toggles, Scopes (`var`/`let`/`const`), Temporal Dead Zone, DOM Queries | Separation of concerns, Class toggles vs inline styles | 🟢 **SDE-1 Warmup** (15–20 mins) | [Read Guide](file:///e:/js-fun-projects/07_Add_friend_project/README.md) |
 | **08** | [08_insta_like_project](file:///e:/js-fun-projects/08_insta_like_project) | Event Loop, Macrotask Queue, `setTimeout` drift, Timer race conditions | GPU Compositor layers, CSS `transform`/`opacity` vs Reflow | 🟡 **SDE-1 / SDE-2** (20–25 mins) | [Read Guide](file:///e:/js-fun-projects/08_insta_like_project/README.md) |
 | **09** | [09_custom_cursor_project](file:///e:/js-fun-projects/09_custom_cursor_project) | `mousemove`, Coordinate systems (`client` vs `page` vs `screen` vs `offset`) | 60/120 FPS render loops, `requestAnimationFrame`, Lerping physics, Layout Thrashing | 🟡 **SDE-1 / SDE-2** (25–30 mins) | [Read Guide](file:///e:/js-fun-projects/09_custom_cursor_project/README.md) |
 | **10** | [10_image_howver_project](file:///e:/js-fun-projects/10_image_howver_project) | Event Bubbling, Event Capturing, Event Delegation ($O(1)$ memory), Runtime Debugging | `getBoundingClientRect()`, relative container geometry, GPU translations | 🟠 **SDE-2 Core** (25–35 mins) | [Read Guide](file:///e:/js-fun-projects/10_image_howver_project/README.md) |
 | **11** | [11_insta_story_project](file:///e:/js-fun-projects/11_insta_story_project) | Data-driven UI, Array methods (`map`, `forEach`), HTML5 `dataset`, XSS prevention | Timers, Hold-to-pause gestures, State Machine architecture | 🔴 **SDE-2 Classic** (35–45 mins) | [Read Guide](file:///e:/js-fun-projects/11_insta_story_project/README.md) |
 | **12** | [12_number_guesser_game](file:///e:/js-fun-projects/12_number_guesser_game) | Game loops, Strict validation, Type coercion, IEEE 754 `NaN`, `Math.random` | Form submit lifecycle (`preventDefault`), Preventing listener memory leaks | 🟠 **SDE-1 / SDE-2** (30–40 mins) | [Read Guide](file:///e:/js-fun-projects/12_number_guesser_game/README.md) |
+| **13** | [13_star_rating_component](file:///e:/js-fun-projects/13_star_rating_component) | Event Delegation, `closest()`, Transient Hover vs Persistent State | SVG rendering, WCAG `radiogroup` a11y, Keyboard arrows & live regions | 🟢 **SDE-1 / SDE-2** (25–35 mins) | [Read Guide](file:///e:/js-fun-projects/13_star_rating_component/README.md) |
+| **14** | [14_autocomplete_typeahead](file:///e:/js-fun-projects/14_autocomplete_typeahead) | Debounce closures, `AbortController` race mitigation, In-memory `Map` Cache | Keyboard navigation listbox, Substring highlight without XSS | 🔴 **SDE-2 Core (#1 Asked)** (35–45 mins) | [Read Guide](file:///e:/js-fun-projects/14_autocomplete_typeahead/README.md) |
+| **15** | [15_countdown_timer_stopwatch](file:///e:/js-fun-projects/15_countdown_timer_stopwatch) | Timestamp Delta Drift-Correction, State transitions, Lap split analysis | SVG $C = 2\pi r$ `stroke-dashoffset`, Web Audio API zero-asset synthesizer | 🟠 **SDE-1 / SDE-2** (30–40 mins) | [Read Guide](file:///e:/js-fun-projects/15_countdown_timer_stopwatch/README.md) |
+| **16** | [16_kanban_board_drag_drop](file:///e:/js-fun-projects/16_kanban_board_drag_drop) | HTML5 Drag & Drop API, Vertical midpoint insertion, LocalStorage CRUD | `e.preventDefault()` gotcha, Keyboard accessible reordering | 🔴 **SDE-2 Classic** (40–50 mins) | [Read Guide](file:///e:/js-fun-projects/16_kanban_board_drag_drop/README.md) |
+| **17** | [17_toast_notification_system](file:///e:/js-fun-projects/17_toast_notification_system) | Singleton API ergonomics, FIFO concurrency queue, Pause-on-hover timers | CSS keyframes sync with `animationend`, Screen reader `role="alert"` | 🔴 **SDE-2 Architecture** (35–45 mins) | [Read Guide](file:///e:/js-fun-projects/17_toast_notification_system/README.md) |
+| **18** | [18_nested_comment_system](file:///e:/js-fun-projects/18_nested_comment_system) | N-Ary Tree Data Structure, DFS recursion, Normalized State Tables | Recursive DOM mounting, Collapsible thread folding, Subtree counter | 🟣 **SDE-2 / SDE-3 Classic** (40–50 mins) | [Read Guide](file:///e:/js-fun-projects/18_nested_comment_system/README.md) |
 
 ---
 
