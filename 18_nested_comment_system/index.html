@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Production-grade Nested Recursive Comment System with Tree Traversal, Collapsible Threads, and Immutable State.">
+  <title>Nested Recursive Comments | Machine Coding Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <header class="app-header">
+      <span class="badge">Machine Coding SDE-2 / SDE-3 Classic</span>
+      <h1>Recursive Discussion Thread</h1>
+      <p class="subtitle">Built with N-Ary Tree Traversal, Recursive DOM Rendering & Thread Collapse</p>
+    </header>
+
+    <!-- Top Level Post Card -->
+    <article class="original-post-card">
+      <div class="post-meta">
+        <span class="author-tag">Posted by <strong>@dan_abramov</strong></span>
+        <span class="post-time">• 3 hours ago</span>
+        <span class="flair-badge">Architecture Discussion</span>
+      </div>
+      <h2 class="post-title">Should we deprecate direct DOM mutations in modern vanilla JavaScript?</h2>
+      <p class="post-body">
+        As browser engines optimize compositing layers and reactive frameworks dominate, does writing imperative DOM manipulation still make sense for high-scale enterprise applications? Share your thoughts and architectural trade-offs below!
+      </p>
+    </article>
+
+    <!-- New Top-Level Comment Input Form -->
+    <section class="comment-input-card">
+      <h3>Join the Discussion</h3>
+      <form id="newCommentForm" class="comment-form">
+        <div class="input-row">
+          <input type="text" id="authorInput" placeholder="Your username (e.g. @sarah_dev)" required maxlength="30" value="@frontend_ninja">
+        </div>
+        <textarea id="commentTextInput" rows="3" placeholder="What are your thoughts on this topic?" required maxlength="500"></textarea>
+        <div class="form-footer">
+          <span class="char-count" id="charCount">0 / 500</span>
+          <button type="submit" class="btn btn-primary" id="postCommentBtn">Post Comment</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Thread Controls & Sort -->
+    <div class="thread-controls">
+      <div class="comments-counter">
+        <span id="totalCommentsCount">0</span> Comments
+      </div>
+      <div class="sort-selector">
+        <label for="sortOrder">Sort by:</label>
+        <select id="sortOrder">
+          <option value="upvotes" selected>Most Upvoted</option>
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Recursive Comments Tree Container -->
+    <main class="comments-stream" id="commentsStream">
+      <!-- Injected recursively via JavaScript -->
+    </main>
+
+    <!-- Interview Concepts Callout -->
+    <aside class="interview-callout">
+      <h3>💡 Machine Coding Tree Recursion Checklist:</h3>
+      <ul>
+        <li><strong>N-Ary Tree Data Structure:</strong> Representing comments where each node contains <code>replies: []</code>.</li>
+        <li><strong>Recursive DFS Updates:</strong> Traversing the tree immutably to add replies, increment votes, or delete nodes.</li>
+        <li><strong>Collapsible Thread Branches:</strong> Toggling <code>isCollapsed: true</code> and computing child counts dynamically.</li>
+        <li><strong>Reply-in-Place UI:</strong> Dynamically mounting inline reply textareas below target nodes.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
