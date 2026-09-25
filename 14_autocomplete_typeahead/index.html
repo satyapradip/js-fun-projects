@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Production-grade Autocomplete / Typeahead Search with Debouncing, AbortController, Caching, and Keyboard Navigation.">
+  <title>Typeahead & Autocomplete Search | Machine Coding Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <header class="app-header">
+      <span class="badge">Machine Coding SDE-2 Core</span>
+      <h1>Debounced Typeahead Search</h1>
+      <p class="subtitle">Built with AbortController, Client Caching, Race Condition Guards & ARIA Combobox</p>
+    </header>
+
+    <main class="search-card">
+      <!-- Search Input Container -->
+      <div class="combobox-wrapper" role="combobox" aria-expanded="false" aria-haspopup="listbox" id="combobox">
+        <div class="input-container">
+          <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="Search programming languages, tools, frameworks..." 
+            autocomplete="off" 
+            spellcheck="false"
+            aria-autocomplete="list"
+            aria-controls="suggestionsList"
+          >
+
+          <!-- Loading Spinner -->
+          <div class="spinner" id="loadingSpinner" hidden aria-label="Loading suggestions"></div>
+
+          <!-- Clear Button -->
+          <button type="button" id="clearBtn" class="clear-btn" hidden aria-label="Clear search input">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Suggestion Dropdown List -->
+        <ul class="suggestions-list" id="suggestionsList" role="listbox" aria-label="Search suggestions" hidden>
+          <!-- Injected via JavaScript -->
+        </ul>
+      </div>
+
+      <!-- Recent Searches Chips -->
+      <section class="recent-searches-section" id="recentSearchesSection">
+        <div class="recent-header">
+          <span class="recent-title">Recent Searches</span>
+          <button type="button" class="btn-clear-recent" id="clearRecentBtn">Clear</button>
+        </div>
+        <div class="recent-chips" id="recentChips">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- Selected Result Card -->
+      <section class="selection-card" id="selectionCard" hidden>
+        <div class="selection-badge" id="selectionCategory">Category</div>
+        <h3 id="selectionTitle">Item Name</h3>
+        <p id="selectionDesc">Detailed description of the chosen technology.</p>
+      </section>
+    </main>
+
+    <!-- Metrics Bar (Network vs Cache hits) -->
+    <div class="metrics-bar">
+      <div class="metric-item">
+        <span class="metric-label">Network Requests:</span>
+        <span class="metric-val" id="metricNetwork">0</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label">Cache Hits:</span>
+        <span class="metric-val text-green" id="metricCache">0</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label">Aborted In-Flight:</span>
+        <span class="metric-val text-yellow" id="metricAborted">0</span>
+      </div>
+    </div>
+
+    <!-- Interview Concepts Callout -->
+    <aside class="interview-callout">
+      <h3>💡 Machine Coding Evaluation Criteria:</h3>
+      <ul>
+        <li><strong>Debounce vs Throttle:</strong> Why autocomplete must use debounce (delay execution until user stops typing).</li>
+        <li><strong>Race Condition Prevention:</strong> Using <code>AbortController</code> to cancel previous pending promises.</li>
+        <li><strong>LRU / Map Caching:</strong> Storing past query responses in memory to eliminate redundant network hits.</li>
+        <li><strong>Sanitized Substring Highlighting:</strong> Using safe string replacement or DOM fragments to avoid XSS vulnerabilities.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
