@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Precision Stopwatch and Countdown Timer with timestamp delta drift correction, SVG progress ring, and Web Audio API synthesis.">
+  <title>Precision Timer & Stopwatch | Machine Coding Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <header class="app-header">
+      <span class="badge">Machine Coding SDE-1 / SDE-2</span>
+      <h1>Precision Timer & Stopwatch</h1>
+      <p class="subtitle">Built with Timestamp Delta Drift-Correction, Web Audio API & SVG Progress Rings</p>
+    </header>
+
+    <!-- Mode Switcher Tabs -->
+    <div class="tabs-container" role="tablist" aria-label="Timer modes">
+      <button type="button" class="tab-btn active" id="tabStopwatch" role="tab" aria-selected="true" aria-controls="stopwatchPanel">
+        ⏱️ Stopwatch
+      </button>
+      <button type="button" class="tab-btn" id="tabTimer" role="tab" aria-selected="false" aria-controls="timerPanel">
+        ⏳ Countdown
+      </button>
+    </div>
+
+    <!-- Main Widget Container -->
+    <main class="timer-card">
+      <!-- SVG Circular Progress Indicator -->
+      <div class="circle-container">
+        <svg class="progress-ring" width="280" height="280" viewBox="0 0 280 280">
+          <circle 
+            class="progress-ring-bg" 
+            cx="140" 
+            cy="140" 
+            r="120" 
+            stroke-width="10"
+          />
+          <circle 
+            class="progress-ring-fill" 
+            id="progressRing" 
+            cx="140" 
+            cy="140" 
+            r="120" 
+            stroke-width="10"
+          />
+        </svg>
+
+        <!-- Digital Readout inside circle -->
+        <div class="display-content">
+          <div class="time-readout" id="timeDisplay">00:00:00<span class="ms-part" id="msDisplay">.00</span></div>
+          <div class="status-indicator" id="statusBadge">READY</div>
+        </div>
+      </div>
+
+      <!-- Countdown Inputs (Visible only in Countdown Mode when Idle) -->
+      <section class="timer-input-section" id="timerInputSection" hidden>
+        <div class="input-group">
+          <label for="hoursInput">Hours</label>
+          <input type="number" id="hoursInput" min="0" max="99" value="0" placeholder="00">
+        </div>
+        <span class="colon-sep">:</span>
+        <div class="input-group">
+          <label for="minsInput">Mins</label>
+          <input type="number" id="minsInput" min="0" max="59" value="1" placeholder="00">
+        </div>
+        <span class="colon-sep">:</span>
+        <div class="input-group">
+          <label for="secsInput">Secs</label>
+          <input type="number" id="secsInput" min="0" max="59" value="30" placeholder="00">
+        </div>
+      </section>
+
+      <!-- Action Controls -->
+      <div class="control-actions">
+        <button type="button" class="btn btn-secondary" id="resetBtn" disabled>Reset</button>
+        <button type="button" class="btn btn-primary" id="startPauseBtn">Start</button>
+        <button type="button" class="btn btn-secondary" id="lapBtn" disabled>Lap</button>
+      </div>
+
+      <!-- Quick Presets for Countdown -->
+      <div class="presets-row" id="presetsRow" hidden>
+        <button type="button" class="preset-btn" data-secs="60">1 Min</button>
+        <button type="button" class="preset-btn" data-secs="300">5 Mins</button>
+        <button type="button" class="preset-btn" data-secs="600">10 Mins</button>
+        <button type="button" class="preset-btn" data-secs="1500">25 Mins (Pomodoro)</button>
+      </div>
+
+      <!-- Laps Section (Stopwatch mode) -->
+      <section class="laps-section" id="lapsSection">
+        <div class="laps-header">
+          <span>Lap #</span>
+          <span>Split Time</span>
+          <span>Total Time</span>
+        </div>
+        <ul class="laps-list" id="lapsList">
+          <li class="laps-empty">No laps recorded yet. Press "Lap" while running.</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Keyboard Shortcuts Bar -->
+    <div class="shortcuts-bar">
+      <span><kbd>Space</kbd> Start/Pause</span>
+      <span><kbd>L</kbd> Lap</span>
+      <span><kbd>R</kbd> Reset</span>
+    </div>
+
+    <!-- Interview Concepts Callout -->
+    <aside class="interview-callout">
+      <h3>💡 Machine Coding Timing Mechanics:</h3>
+      <ul>
+        <li><strong>Why <code>setInterval</code> Drifts:</strong> Macrotask queues yield to main-thread tasks, losing 2–15ms per second.</li>
+        <li><strong>Delta Time Correction:</strong> Calculating <code>elapsed = Date.now() - startTime</code> guarantees precision.</li>
+        <li><strong>SVG Circumference Calculation:</strong> <code>dashoffset = circumference * (1 - progress)</code> where $C = 2 \pi r$.</li>
+        <li><strong>Synthesizing Audio without MP3 files:</strong> Generating a finish chime via the <code>AudioContext</code> oscillator API.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
