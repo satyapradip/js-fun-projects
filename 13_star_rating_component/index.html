@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive, accessible Star Rating Component for JavaScript Machine Coding Interviews.">
+  <title>Star Rating Component | Machine Coding Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <span class="badge">Machine Coding SDE-1 / SDE-2</span>
+      <h1>Interactive Star Rating</h1>
+      <p class="subtitle">Built with Event Delegation, State Machines & WCAG a11y standards</p>
+    </header>
+
+    <main class="rating-card" id="ratingCard">
+      <div class="product-preview">
+        <div class="product-badge">Product Review</div>
+        <h2>Frontend System Design Course</h2>
+        <p>How would you rate your overall learning experience?</p>
+      </div>
+
+      <!-- Star Rating Widget -->
+      <section class="rating-widget" aria-label="Product rating selection">
+        <div 
+          class="stars-container" 
+          id="starsContainer" 
+          role="radiogroup" 
+          aria-label="Rating from 1 to 5 stars"
+          tabindex="0"
+        >
+          <!-- 5 Stars injected or static for SEO & fallback -->
+          <button type="button" class="star-btn" data-value="1" role="radio" aria-checked="false" aria-label="1 Star out of 5">
+            <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          </button>
+
+          <button type="button" class="star-btn" data-value="2" role="radio" aria-checked="false" aria-label="2 Stars out of 5">
+            <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          </button>
+
+          <button type="button" class="star-btn" data-value="3" role="radio" aria-checked="false" aria-label="3 Stars out of 5">
+            <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          </button>
+
+          <button type="button" class="star-btn" data-value="4" role="radio" aria-checked="false" aria-label="4 Stars out of 5">
+            <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          </button>
+
+          <button type="button" class="star-btn" data-value="5" role="radio" aria-checked="false" aria-label="5 Stars out of 5">
+            <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Sentiment Label & Screen reader live announcement -->
+        <div class="feedback-panel">
+          <div class="sentiment-text" id="sentimentText">Select your rating</div>
+          <div class="rating-metric" id="ratingMetric">0 / 5</div>
+        </div>
+
+        <div id="srFeedback" class="sr-only" aria-live="polite">No rating selected</div>
+
+        <!-- Progress meter -->
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </section>
+
+      <!-- Action controls -->
+      <footer class="card-footer">
+        <button type="button" class="btn-secondary" id="resetBtn" disabled>Reset Rating</button>
+        <button type="button" class="btn-primary" id="submitBtn" disabled>Submit Feedback</button>
+      </footer>
+
+      <!-- Confirmation Toast -->
+      <div class="confirmation-box" id="confirmationBox" hidden>
+        <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+        <span id="confirmationMsg">Thank you! Your feedback has been recorded.</span>
+      </div>
+    </main>
+
+    <!-- Interview Concepts Card -->
+    <aside class="interview-callout">
+      <h3>💡 What Interviewers Test In This Round:</h3>
+      <ul>
+        <li><strong>Event Delegation:</strong> Handling mouseover/click via one parent listener instead of $N$ buttons.</li>
+        <li><strong>Hover State vs Active State:</strong> Decoupling preview state (`hoveredValue`) from permanent state (`selectedValue`).</li>
+        <li><strong>Full Keyboard Accessibility:</strong> Arrow keys (`ArrowLeft`, `ArrowRight`), `Home`, `End`, and `1-5` shortcuts.</li>
+        <li><strong>WCAG Compliance:</strong> Screen reader announcements with `aria-checked` and `aria-live`.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
